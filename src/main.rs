@@ -61,7 +61,7 @@ fn main() {
             NextOperation::Buy => {
                 match get_near_price() {
                     Ok(current_price) => {
-                        if sold_for - current_price >= 0.2 {
+                        if sold_for - current_price >= 0.002 {
                             match buy(total_money_amount, current_price) {
                                 Ok(near_amount) => {
                                     total_near_amount += near_amount;
@@ -82,7 +82,7 @@ fn main() {
             NextOperation::Sell => {
                 match get_near_price() {
                     Ok(current_price) => {
-                        if current_price - bought_for >= 0.2 {
+                        if current_price - bought_for >= 0.002 {
                             let five_percent = total_near_amount / 100_f64 * 5_f64;
                             match sell(five_percent, current_price) {
                                 Ok(money) => {
@@ -103,6 +103,6 @@ fn main() {
             }
         }
 
-        std::thread::sleep(std::time::Duration::from_secs(30));
+        std::thread::sleep(std::time::Duration::from_secs(1));
     }
 }
